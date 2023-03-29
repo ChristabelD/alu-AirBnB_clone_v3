@@ -95,6 +95,7 @@ class TestDBStorage(unittest.TestCase):
         """test for get method"""
         store = DBStorage()
         my_state = State(name="Ondo")
+        my_state.save()
         object = store.get("State", "Rivers")
         self.assertIsNone(object)
 

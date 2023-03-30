@@ -100,9 +100,10 @@ class TestDBStorageOne(unittest.TestCase):
 
     def tearDown(self):
         """Tear down"""
-        self.store.delete(self.my_state)
-        self.store.save()
-        self.store.close()
+        del self.store
+        # self.store.delete(self.my_state)
+        # self.store.save()
+        # self.store.close()
 
     def test_get(self):
         """test for get method"""

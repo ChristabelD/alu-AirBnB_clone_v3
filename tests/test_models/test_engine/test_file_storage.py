@@ -136,7 +136,7 @@ class TestFileStorageTwo(unittest.TestCase):
         """test for count method"""
         store = FileStorage()
         store.reload()
-        counter = store.count()
+        counter = store.count(State)
         new_state = State(name="Osun")
         new_state.save()
         self.assertEqual(models.storage.count(State), counter + 1)

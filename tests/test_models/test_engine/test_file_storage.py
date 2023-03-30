@@ -127,7 +127,7 @@ class TestFileStorage(unittest.TestCase):
         """test for count method"""
         store = FileStorage()
         store.reload()
-        total = self.storage.count()
+        total = store.count()
         self.assertIsInstance(total, int)
         cls_total = self.storage.count("State")
         self.assertIsInstance(cls_total, int)

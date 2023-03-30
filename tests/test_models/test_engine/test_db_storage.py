@@ -96,7 +96,7 @@ class TestDBStorage(unittest.TestCase):
         store = DBStorage()
         my_state = State(name="Ondo")
         my_state.save()
-        self.assertIs(my_state, models.storage.get("State", my_state.id))
+        self.assertIs(my_state, store.get("State", my_state.id))
         object = store.get("State", "Ondo")
         self.assertEqual(object.id, my_state.id)
         obj = store.get("State", "Enugu")

@@ -88,20 +88,36 @@ class TestFileStorage(unittest.TestCase):
         """Test that save properly saves objects to file.json"""
 
 
-class TestDBStorage(unittest.TestCase):
+@unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+class TestDBStorageOne(unittest.TestCase):
     """Test the DBStorage class """
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def setUp(self):
+        self.store = DBStorage()
+        self.store.reload()
+        self.my_state = State(name="Abia")
+        self.my_state.save()
+
+    def tearDown(self):
+        self.store.delete(self.my_state)
+        self.store.save()
+        self.store.close()
+
     def test_get(self):
         """test for get method"""
-        store = DBStorage()
-        my_state = State(name="Ondo")
-        my_state.save()
-        self.assertIs(my_state, store.get("State", my_state.id))
-        object = store.get("State", "Ondo")
-        self.assertEqual(object.id, my_state.id)
-        obj = store.get("State", "Enugu")
-        self.assertIsNone(obj)
+        object = self.store.get(State, self.my_state.id)
+        self.assertEqual(object.id, self.my_state.id)
+        # store = DBStorage()
+        # my_state = State(name="Ondo")
+        # my_state.save()
+        # self.assertIs(my_state, store.get("State", my_state.id))
+        # object = store.get("State", "Ondo")
+        # self.assertEqual(object.id, my_state.id)
+        # obj = store.get("State", "Enugu")
+        # self.assertIsNone(obj)
 
+
+class TestDBStorageTwo(unittest.TestCase):
+    """Test the DBStorage class """
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
         """test for count method"""

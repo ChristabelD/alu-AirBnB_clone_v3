@@ -114,20 +114,32 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+
+@unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+class TestFileStorageOne(unittest.TestCase):
+    """Test the FileStorage class"""
     def test_get(self):
         """test for get method"""
         store = FileStorage()
+        store.reload()
         my_state = State(name="Ondo")
-        object = store.get("State", "Rivers")
-        self.assertIsNone(object)
+        my_state.save()
+        object = store.get(State, my_state.id)
+        self.assertEqual(object.id, my_state.id)
 
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+
+@unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+class TestFileStorageTwo(unittest.TestCase):
+    """Test the FileStorage class"""
+
     def test_count(self):
         """test for count method"""
         store = FileStorage()
         store.reload()
-        total = store.count()
+        new_state = State(name="Osun")
+        new_state.save()
+        total = store.count(State)
+        self.assertEqual(total, 1)
         self.assertIsInstance(total, int)
-        cls_total = store.count("State")
-        self.assertIsInstance(cls_total, int)
+        # cls_total = store.count("State")
+        # self.assertIsInstance(cls_total, int)

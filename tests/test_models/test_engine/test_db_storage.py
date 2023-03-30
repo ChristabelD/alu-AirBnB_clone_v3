@@ -96,7 +96,7 @@ class TestDBStorageOne(unittest.TestCase):
         self.store = DBStorage()
         self.store.reload()
         self.my_state = State(name="Abia")
-        self.store.save()
+        self.my_state.save()
 
     def tearDown(self):
         """Tear down"""

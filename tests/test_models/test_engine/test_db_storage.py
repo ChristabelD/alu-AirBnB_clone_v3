@@ -92,12 +92,14 @@ class TestFileStorage(unittest.TestCase):
 class TestDBStorageOne(unittest.TestCase):
     """Test the DBStorage class """
     def setUp(self):
+        """Set up"""
         self.store = DBStorage()
         self.store.reload()
         self.my_state = State(name="Abia")
-        self.my_state.save()
+        self.store.save()
 
     def tearDown(self):
+        """Tear down"""
         self.store.delete(self.my_state)
         self.store.save()
         self.store.close()
@@ -106,14 +108,6 @@ class TestDBStorageOne(unittest.TestCase):
         """test for get method"""
         object = self.store.get(State, self.my_state.id)
         self.assertEqual(object.id, self.my_state.id)
-        # store = DBStorage()
-        # my_state = State(name="Ondo")
-        # my_state.save()
-        # self.assertIs(my_state, store.get("State", my_state.id))
-        # object = store.get("State", "Ondo")
-        # self.assertEqual(object.id, my_state.id)
-        # obj = store.get("State", "Enugu")
-        # self.assertIsNone(obj)
 
 
 class TestDBStorageTwo(unittest.TestCase):

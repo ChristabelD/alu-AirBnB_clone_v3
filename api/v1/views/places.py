@@ -60,12 +60,12 @@ def create_place(city_id):
         return make_response(jsonify({"error": "Missing user_id"}), 400)
 
     req_body = request.get_json()
-    
-    user = storage.get(User, req_body["user_id"])
+    user_id = req_body.get("user_id")
+    user = storage.get(User, user_id)
     if user is None:
         abort(404)
 
-    if "name" not in request.get_json():
+    if "name" not in req_body:
         return make_response(jsonify({"error": "Missing name"}), 400)
 
     req_body["city_id"] = city.id
@@ -77,7 +77,7 @@ def create_place(city_id):
 
 
 @app_views.route("/places/<place_id>", methods=['PUT'], strict_slashes=False)
-def update_user(place_id):
+def update_place(place_id):
     """Updates a Place object"""
     place = storage.get(Place, place_id)
     if place is None:

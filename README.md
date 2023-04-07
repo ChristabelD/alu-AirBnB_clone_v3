@@ -154,7 +154,8 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
-Hephzibah Ihesie - [Github](https://github.com/Adura-Hephzibah)
+Shema Fred - [Github](https://github.com/Ndi-Shema)
+Celestin HAKORIMANA - [Github](https://github.com/Celestin25)
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
 
